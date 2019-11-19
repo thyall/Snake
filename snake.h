@@ -5,7 +5,7 @@
 # include <fstream>
 # include <string>
 
-class maze
+class Maze
 {
 private:
 	//usaremos uma matriz atraves ponteiro para ponteiro
@@ -16,14 +16,19 @@ private:
 	int col;
 
 public:
-	read_maze(std::string filepath); // ou pode ser make_maze(string de caminho); um pónteiro apontando pro arquivo e eu passo pela main
+	/// Types of cell inside the maze.
+    enum cell_type : int
+    {
+        FREE=0,  //!< A free empty cell.
+        WALL=1,  //!< A wall inside the maze.
+        ENTRY=2, //!< A cell marking the maze's entry point.
+        EXIT=3,  //!< A cell marking the maze's exit point.
+        PATH=4   //!< A cell that has been marked as part of the path that leads from the maze's entry point to the maze's exit point.
+    };
 
-	//definindo dimensões
-	set_dimensions();
-
-	//print_maze	
+	// Prints a maze representation on the standard output.
+    void print(void) const;
 };
-
 
 /*class snake
 {

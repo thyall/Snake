@@ -8,8 +8,15 @@
 # include <fstream>
 # include <string>
 # include "snake.h"
+# include <vector>
 
-/*int read_file( std::string file_name, vector<vector<int>> &matrix )
+using namespace std;
+
+#define ERR_FAILED_OPENING_INPUT_FILE 0
+#define ERR_MISSING_ENTRY_EXIT 1
+#define READ_OK 2
+
+int read_file( std::string file_name, vector<vector<int>> &matrix )
 {
     // The input file strem.
     std::ifstream ifs { file_name }; // Creating and Opening the stream.
@@ -30,19 +37,23 @@
         {
             // Teste which type of cell we've got.
             if ( elem == '0' ) // espaço vazio no labirinto.
-                temp.push_back( Maze::FREE );
+                temp.push_back(Maze::FREE);
+
             else if ( elem == '1' ) // parede
                 temp.push_back( Maze::WALL );
+
             else if ( elem == 'm' or elem == 'M' ) // The start.
             {
-                temp.push_back( Maze::ENTRY );
+                temp.push_back(Maze::ENTRY );
                 has_entry = true; // Turn on flag to indicate we've found the entry cell.
             }
+
             else if ( elem == 'e' or elem == 'E' ) // The exit.
             {
                 temp.push_back( Maze::EXIT );
                 has_exit = true; // Turn on flag to indicate we've found the exit cell.
             }
+
             else // Found an invalid value in the file.
                 std::cerr << "Invalid value!!\n";
         }
@@ -58,22 +69,26 @@
     ifs.close();
 
     return READ_OK;
-}*/
+}
 
 int main(int argc, char const *argv[])
 {
-	std::string filepath;
-
-
 	/*if ( argc != 2 ) {
         std::cout << ">>> Missing input file!\n"
                   << "    Sintax: maze [inpu_file_name]\n\n";
         return 1;
     }*/
 
-    maze::batata;
+    //Maze teste;
 
-    batata.read_maze(filepath);
+    //ifstream myfile;
+
+    //myfile.open("lab_irregular.dat");
+
+    //teste.readfile(myfile);
+
+    vector<vector<int>> input_matrix;
+    auto result = read_file( "lab_irregular.dat", input_matrix );
 
 	// criar tabuleiro
 
