@@ -7,6 +7,7 @@
 
 class maze
 {
+private:
 	//usaremos uma matriz atraves ponteiro para ponteiro
 	char **labirinto; 
 
@@ -15,9 +16,12 @@ class maze
 	int col;
 
 public:
-	make_maze(string filepath); // ou pode ser make_maze(string de caminho); um pónteiro apontando pro arquivo e eu passo pela main
-	//print_maze
-	
+	read_maze(std::string filepath); // ou pode ser make_maze(string de caminho); um pónteiro apontando pro arquivo e eu passo pela main
+
+	//definindo dimensões
+	set_dimensions();
+
+	//print_maze	
 };
 
 

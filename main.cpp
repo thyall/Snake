@@ -9,7 +9,7 @@
 # include <string>
 # include "snake.h"
 
-int read_file( std::string file_name, vector<vector<int>> &matrix )
+/*int read_file( std::string file_name, vector<vector<int>> &matrix )
 {
     // The input file strem.
     std::ifstream ifs { file_name }; // Creating and Opening the stream.
@@ -58,18 +58,22 @@ int read_file( std::string file_name, vector<vector<int>> &matrix )
     ifs.close();
 
     return READ_OK;
-}
+}*/
 
 int main(int argc, char const *argv[])
 {
+	std::string filepath;
 
-	if ( argc != 2 ) {
+
+	/*if ( argc != 2 ) {
         std::cout << ">>> Missing input file!\n"
                   << "    Sintax: maze [inpu_file_name]\n\n";
         return 1;
-    }
+    }*/
 
-	/* code */
+    maze::batata;
+
+    batata.read_maze(filepath);
 
 	// criar tabuleiro
 
