@@ -1,5 +1,6 @@
 # include <iostream>
 # include <fstream>
+# include <string>
 # include "snake.h"
 
 void make_maze(std::ifstream maze)

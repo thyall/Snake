@@ -3,24 +3,25 @@
 
 # include <iostream>
 # include <fstream>
+# include <string>
 
 class maze
 {
-public:
 	//usaremos uma matriz atraves ponteiro para ponteiro
 	char **labirinto; 
 
 	//dimensões
 	int row;
-	int col;	
+	int col;
 
-	make_maze(std::ifstream maze); // ou pode ser make_maze(std::ifstream *maze); um pónteiro apontando pro arquivo e eu passo pela main
+public:
+	make_maze(string filepath); // ou pode ser make_maze(string de caminho); um pónteiro apontando pro arquivo e eu passo pela main
 	//print_maze
 	
 };
 
 
-class snake
+/*class snake
 {
 
 	
@@ -29,10 +30,10 @@ class snake
 class player
 {
 
-	//find_aple()
-	//move()
+	find_aple()
+	move()
 
-}
+}*/
 	
 
 #endif
