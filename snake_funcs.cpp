@@ -17,3 +17,8 @@ void make_maze(std::ifstream maze)
 	    jogo[i] = new char[++col];
 	}	    
 }
+
+void print_maze()
+
+//bool find_aple()
+//move()

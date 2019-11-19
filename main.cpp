@@ -1,11 +1,18 @@
+/*!
+ * Snake
+ * Turmna de LP1, 2019.2
+ * @date November, 18th.
+ * @author Thyall
+ */
 # include <iostream>
+# include <fstream>
+# include "snake.h"
 
-const char SEP_CHAR = '-';
-const size_t SEP_FILL = 80;
-std::cout <<"\e[2m" <<
-		std::setfill(SEP_CHAR) <<
-		std::setw(SEP_FILL) <<
-		"\e[0m" <<
-		"\n";
 
-return 0;
+int main(int argc, char const *argv[])
+{
+	/* code */
+
+	// criar tabuleiro
+	return 0;
+}
