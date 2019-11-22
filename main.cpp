@@ -33,11 +33,11 @@ std::ostream& operator<<( std::ostream& os, const Position & p )
  * @param end O ponto (coordenada) de saída do labirinto.
  * @return `true` se existe uma solução; `false` caso contrário.
  */
-bool solve_maze( const Maze& m, const Position& start, const Position& end ) // colocar na classe player
+/*bool solve_maze( const Maze& m, const Position& start, const Position& end ) // colocar na classe player
 {
     // TODO
     return false;
-}
+}*/
 
 /// Reads a maze from the input file and returns a matrix of integers representing the input maze.
 /*!
@@ -66,21 +66,21 @@ int read_file( std::string file_name, vector<vector<int>> &matrix )
         {
             // Teste which type of cell we've got.
             if ( elem == '.' or elem == ' ' or elem == '0') // espaço vazio no labirinto.
-                temp.push_back( Maze::FREE );
+                temp.push_back(Snakegame::FREE );
 
             else if ( elem == '1' or elem == '#' ) // parede
-                temp.push_back( Maze::WALL );
+                temp.push_back( Snakegame::WALL );
 
             else if ( elem == 'm' or elem == 'M' or elem == '*' ) // The start.
             {
-                temp.push_back( Maze::ENTRY );
+                temp.push_back( Snakegame::ENTRY );
                 has_entry = true; // Turn on flag to indicate we've found the entry cell.
             }
 
             //isso aqui vai ser retirado
             else if ( elem == 'e' or elem == 'E' ) // The exit.
             {
-                temp.push_back( Maze::APPLE );
+                temp.push_back( Snakegame::APPLE );
                 has_apple = true; // Turn on flag to indicate we've found the exit cell.
             }
 
@@ -135,11 +135,11 @@ int main( int argc, char *argv[] )
      std::cerr << ">>> Undefined error code received!\n";
 
     // Cria o objeto labirinto.
-    Maze maze( input_matrix );
+    Snakegame maze( input_matrix );
     // Exibe o labirinto ainda sem solução.
     std::cout << ">>> Input maze is: \n";
     maze.print();
-    std::cout << "    Entry is located at " << maze.entry()
+    std::cout << "    Snake is located at " << maze.entry()
               << ", and Apple is located at " << maze.apple() << std::endl << std::endl;
 
     std::cout << ">>> Finding a solution, please wait...\n";

@@ -1,6 +1,6 @@
 #include "snake.h"
 
-Maze::Maze( const vector< vector<int> > & input_matrix )
+Snakegame::Snakegame( const vector< vector<int> > & input_matrix )
     : m_maze{input_matrix}
 {
     // the rows count in matrix.
@@ -8,7 +8,7 @@ Maze::Maze( const vector< vector<int> > & input_matrix )
     // Locate and store the coordinates of the entry and the exit cells.
     for ( const auto line : m_maze )
     {
-        auto pos_entry = std::find( line.begin(), line.end(), APPLE );
+        auto pos_entry = std::find( line.begin(), line.end(), ENTRY );
         if ( pos_entry != line.end() ) { // Found?
             m_entry.col = std::distance( line.begin(), pos_entry );
             m_entry.row = row;
@@ -22,7 +22,7 @@ Maze::Maze( const vector< vector<int> > & input_matrix )
         row++;
     }
 }
-void Maze::print() const
+void Snakegame::print() const
 {
     // For each row of the maze.
     for ( const auto& row : m_maze )
@@ -32,15 +32,15 @@ void Maze::print() const
         {
             // Determine whith type of cell we have here.
             if ( col == WALL )             std::cout << "#";
-            else if ( col == Maze::FREE )  std::cout << " ";
-            else if ( col == Maze::APPLE )  std::cout << "a";
-            else if ( col == Maze::PATH )  std::cout << "•";
-            else if ( col == Maze::ENTRY ) std::cout << "*";
+            else if ( col == Snakegame::FREE )  std::cout << " ";
+            else if ( col == Snakegame::APPLE )  std::cout << "@";
+            else if ( col == Snakegame::PATH )  std::cout << "•";
+            else if ( col == Snakegame::ENTRY ) std::cout << "O";
         }
         std::cout << std::endl;
     }
 }
 
-void Snake::SnakeWalk();
+//void Snake::SnakeWalk();
 
-bool Snake::eatApple();
+//bool Snake::eatApple();
