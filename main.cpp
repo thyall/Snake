@@ -86,6 +86,7 @@ int read_file( std::string file_name, vector<vector<int>> &matrix )
 
             else // Found an invalid value in the file.
                 std::cerr << "Invalid value!!\n";
+
         }
         // Store the new line in the maze.
         matrix.push_back( temp );
@@ -139,7 +140,7 @@ int main( int argc, char *argv[] )
     // Exibe o labirinto ainda sem solução.
     std::cout << ">>> Input maze is: \n";
     maze.print();
-    std::cout << "    Snake is located at " << maze.entry()
+    std::cout << "    Snake is located at " << maze.SnakeHead()
               << ", and Apple is located at " << maze.apple() << std::endl << std::endl;
 
     std::cout << ">>> Finding a solution, please wait...\n";

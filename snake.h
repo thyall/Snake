@@ -6,6 +6,7 @@
 #include <algorithm>
 #include <deque>
 
+
 using std::vector;
 
 /// Represents a location within the maze, as a coordinate pair (row,col).
@@ -30,9 +31,12 @@ class Snakegame {
 
     private:
         vector< vector<int> > m_maze; //!< para armazenar o labirinto
-        vector<int> caminho; //!< criando o vetor para armezenar a cobra
+        //vector<int> caminho; //!< criando o vetor para armezenar a cobra
         Position m_entry; //!< Location of the entry cell.
         Position m_apple;  //!< Location of the apple cell.
+        int lives;
+        std::deque<Position> body_snake;//!< criando o vetor para armezenar a cobra
+        int linha, coluna;
 
     public:
         /// Types of cell inside the maze.
@@ -48,7 +52,7 @@ class Snakegame {
         Snakegame( const vector< vector<int> > & );
 
         /// Return the location (coordinate) of the snake's entry.
-        inline Position entry(void) const
+        inline Position SnakeHead(void) const
         { return m_entry; }
 
         /// Return the location (coordinate) of the maze's apple.
@@ -56,37 +60,27 @@ class Snakegame {
         {return m_apple; }
 
         //return if the next location is wall
-        bool IsWall(); 
+        bool IsWall(int x, int y);
+
+         //return true if the next coordante is a apple
+        bool IsApple(int x, int y); 
 
         /// Prints a maze representation on the standard output.
         void print(void) const;
-
-        /// return how much lives the snake has
-        void lives();
         
         //return the loaction of snakes' head
-        void GetHead();
+        Position GetHead();
 
         //return the coordantes of the way till the apple
         bool FindApple();
 
-        //return true if the next coordante is a apple
-        bool IsApple();
-
         //return a new position for apple
-        bool NewApple();
+        void NewApple();
 
         //move the snake
         void MoveSnake();
+
+        //passando quantidade de linhas e colunas
+        void rowcol(int r, int c);
 };
-
-
-class Level// ????
-{
-public:
-    Level();
-    ~Level();
-    
-};
-
 #endif
