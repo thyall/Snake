@@ -32,7 +32,7 @@ void Snakegame::print() const
         for ( const auto& col : row )
         {
             // Determine whith type of cell we have here.
-            if ( col == WALL )             std::cout << "#";
+            if ( col == Snakegame::WALL )       std::cout << "#";
             else if ( col == Snakegame::FREE )  std::cout << " ";
             else if ( col == Snakegame::APPLE )  std::cout << "@";
             else if ( col == Snakegame::PATH )  std::cout << "•";
@@ -42,46 +42,153 @@ void Snakegame::print() const
     }
 }
 
-/*bool Snakegame::IsWall(int x, int y)
-{
-	if(m_maze[x][y] == WALL)
-		return true;
-}
-
 bool Snakegame::IsApple(int x, int y)
 {
-	if(m_maze[x][y] == APPLE)
+	if(m_maze[x][y] == Snakegame::APPLE)
+  {
 		return true;
-}*/
+  }
 
-Position Snakegame::GetHead()
-{
-	return this -> body_snake.front();
+  return false;
 }
 
-void Snakegame::rowcol(int r, int c)
+bool Snakegame::GetRowCol(int aux1, int aux2)
 {
-	linha = r;
-	coluna = c;
+  linha = aux1;
+  coluna = aux2;
+
+  //testes para saber se as linhas colunas estão coerentes
+  if(linha > MAX_ROW or linha < MIN_ROW)
+    return false;
+
+  else if(coluna > MAX_COL or coluna < MIN_COL)
+    return false;
+
+  else return true;
 }
 
-/*void Snakegame::NewApple()// ja sei eu passo a possição atual da apple, apago gero uma nova e pronto
+void Snakegame::MoveSnake(direcao aux)
 {
-  int x;
-  //nessa linha estou colocando o intervalo de quanto até quanto eu quero que o varie
-  // estou usando n - 4, porque n é um dos lados sendo passado da matriz menos o tamanho do Batleship, para não correr o risco 
-  // o risco de "passar" da matriz
+  //altera o valor atual no maze e 
+  if(aux == up)
+  {
+    //coloca o asterisco (headsnake) na nova posição
+    m_maze[m_entry.row-1][m_entry.col] = Snakegame::ENTRY;
 
-  std::random_device rd;
- 
-  std::mt19937_64 gen(rd());// esse objeto deixa o ramdom mais "pseudo aleatorio possivel"
+    //alterando antiga posição
+    m_maze[m_entry.row][m_entry.col] = Snakegame::FREE;
 
-  std::uniform_int_distribution < unsigned long long > var(0,);
+    m_entry.row = m_entry.row-1;
+  }
 
-  x = var(gen);
+  else if(aux == down)
+  {
+    //coloca o asterisco (headsnake) na nova posição
+    m_maze[m_entry.row+1][m_entry.col] = Snakegame::ENTRY;
 
-  return x;
-	
-}*/
+    //alterando antiga posição
+    m_maze[m_entry.row][m_entry.col] = Snakegame::FREE;
+
+    m_entry.row = m_entry.row+1;
+  }
+
+  else if(aux == right)
+  {
+    //coloca o asterisco (headsnake) na nova posição
+    m_maze[m_entry.row][m_entry.col+1] = Snakegame::ENTRY;
+
+    //alterando antiga posição
+    m_maze[m_entry.row][m_entry.col] = Snakegame::FREE;
+
+    m_entry.col = m_entry.col+1;
+  }
+
+ else if(aux == right)
+ {
+    //coloca o asterisco (headsnake) na nova posição
+    m_maze[m_entry.row][m_entry.col-1] = Snakegame::ENTRY;
+
+    //alterando antiga posição
+    m_maze[m_entry.row][m_entry.col] = Snakegame::FREE;
+
+    m_entry.col = m_entry.col-1;
+ }
+
+}
+
+int Snakegame::GetPosSnake(char aux)
+{
+  if(aux == 'r')
+    return m_entry.row;
+
+  else if(aux == 'c')
+    return m_entry.col;
+
+  else
+    std::cerr << "Invalid parameter!!!" << std::endl;
+
+  return 0;
+
+}
+/*!
+ * this method try to solve the maze.
+ *
+ * the main idea behind is backtracking.
+ * if we find the apple the function return true
+ * but if the cell is WALL ou VISITED the function returns false
+ * after we try to find the right way call back 
+ * then we try to find the correct path by calling the function again with different coordinates
+ * up, down, right and left.
+ */
+
+bool Snakegame::FindApple(int row, int col)
+{
+  if (m_maze[row][col] == APPLE)  
+    return true;
+  
+  if (m_maze[row][col] == WALL or m_maze[row][col] == VISITED )
+      return false;
+
+  m_maze[row][col] = VISITED;  
+      
+  if (FindApple(row, col+1))//right
+  {
+    passos.push_back(right);//salvando coordenada
+    return true;
+  }
+
+  if (FindApple(row+1, col))//down
+  {
+    passos.push_back(down);
+    return true;
+  }
+
+  if (FindApple(row-1, col))//up
+  {
+    passos.push_back(up);
+    return true;
+  }
+
+  if(FindApple(row, col-1))//left
+  {
+    passos.push_back(left);
+    return true;
+  }
+  m_maze[row][col] = Snakegame::FREE;
+  return false;    
+}
+
+void Snakegame::printpassos()
+{
+  auto it1 =  passos.begin();
+  auto it2 = passos.end();
+  while(it1 != it2)
+  {
+     std::cout << *it1 << ' ';
+     it1++;
+  }
+}
+
+
 
 
